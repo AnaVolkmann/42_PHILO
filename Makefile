@@ -1,4 +1,4 @@
-SRCS 	= main.c utils.c handle_args.c init.c monitoring.c
+SRCS 	= main.c utils.c handle_args.c init.c monitoring.c routine.c
 OBJS 	= $(SRCS:.c=.o)
 CC	 	= cc
 RM 		= rm -f
