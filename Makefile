@@ -1,10 +1,9 @@
-SRCS 	= main.c utils.c handle_args.c
+SRCS 	= main.c utils.c handle_args.c init.c monitoring.c
 OBJS 	= $(SRCS:.c=.o)
 CC	 	= cc
 RM 		= rm -f
 CFLAGS 	= -Wall -Werror -Wextra -fsanitize=address
 NAME 	= philo
-AR		= ar rc
 
 all:		$(NAME)
 
