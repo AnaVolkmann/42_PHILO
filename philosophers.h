@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:17:47 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/14 18:05:09 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:58:43 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		ft_atoi(char *str);
 int		ft_strlen(char *str);
 int		ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
-void	destory_all(char *str, t_program *program, pthread_mutex_t *forks);
+void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks);
+void	print_message(char *str, t_philo *philo, int id);
 
 /***********************HANDLE_ARGS**************/
 
@@ -71,5 +72,15 @@ void	init_program(t_program *program, t_philo *philos);
 void	init_forks(pthread_mutex_t *forks, int philo_num);
 void	init_philos(t_philo *philos, t_program *program,
 			pthread_mutex_t *forks, char **argv);
+
+/************************ROUTINE******************/
+
+void	ft_eating(t_philo *philo);
+void	ft_think(t_philo *philo);
+void	ft_sleep(t_philo *philo);
+
+/*************************THREADS*****************/
+
+int	dead_loop(t_philo *philo);
 
 #endif
