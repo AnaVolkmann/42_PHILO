@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:17:47 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 12:58:43 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:53:14 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,23 @@ void	init_forks(pthread_mutex_t *forks, int philo_num);
 void	init_philos(t_philo *philos, t_program *program,
 			pthread_mutex_t *forks, char **argv);
 
-/************************ROUTINE******************/
+/************************ACTIONS******************/
 
-void	ft_eating(t_philo *philo);
+void	ft_eat(t_philo *philo);
 void	ft_think(t_philo *philo);
 void	ft_sleep(t_philo *philo);
 
 /*************************THREADS*****************/
 
-int	dead_loop(t_philo *philo);
+int		dead_loop(t_philo *philo);
+void *philo_routine(void *pointer);
+int	create_thread(t_program *program, pthread_mutex_t *forks);
+
+/************************MONITORING**************/
+
+int		check_if_dead(t_philo *philos);
+void	*monitor(void *pointer);
+int		check_if_all_ate(t_philo *philo);
+
 
 #endif
