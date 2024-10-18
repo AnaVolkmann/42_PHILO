@@ -6,36 +6,62 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:31:06 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 14:48:12 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:25:21 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int check_if_dead(t_philo *philos)
+// Print message funtion
+
+void	print_message(char *str, t_philo *philo, int id)
 {
-	int		i;
-	size_t	current_time;
+	size_t	time;
+
+	pthread_mutex_lock(philo->write_lock);
+	time = get_current_time() - philo->start_time;
+	if (!dead_loop(philo))
+		printf("%zu %d %s\n", time, id, str);
+	pthread_mutex_unlock(philo->write_lock);
+}
+
+// Checks if the philosopher is dead
+
+int	philosopher_dead(t_philo *philo, size_t time_to_die)
+{
+	pthread_mutex_lock(philo->meal_lock);
+	if ((get_current_time() - philo->last_meal >= time_to_die)
+		&& philo->eating == 0)
+		{
+			return (pthread_mutex_unlock(philo->meal_lock), 1);
+		}
+	pthread_mutex_unlock(philo->meal_lock);
+	return (0);
+}
+
+// Check if any philo died
+
+int	check_if_dead(t_philo *philos)
+{
+	int	i;
 
 	i = 0;
-	current_time = get_current_time();
 	while (i < philos[0].num_philos)
 	{
-		pthread_mutex_lock(philos[i].meal_lock);
-		if (current_time - philos[i].last_meal >= philos[i].t_die && philos[i].eating == 0)
+		if (philosopher_dead(&philos[i], philos[i].t_die))
 		{
 			print_message("died", &philos[i], philos[i].id);
 			pthread_mutex_lock(philos[0].dead_lock);
 			*philos->dead = 1;
 			pthread_mutex_unlock(philos[0].dead_lock);
-			pthread_mutex_unlock(philos[i].meal_lock);
 			return (1);
 		}
-		pthread_mutex_unlock(philos[i].meal_lock);
 		i++;
 	}
 	return (0);
 }
+
+// Checks if all the philos ate the num_of_meals
 
 int	check_if_all_ate(t_philo *philos)
 {
@@ -64,7 +90,8 @@ int	check_if_all_ate(t_philo *philos)
 	return (0);
 }
 
-/** @brief Monitor thread routine */
+// Monitor thread routine
+
 void	*monitor(void *pointer)
 {
 	t_philo	*philos;

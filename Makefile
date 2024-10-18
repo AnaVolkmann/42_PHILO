@@ -2,7 +2,7 @@ SRCS 	= main.c utils.c handle_args.c init.c monitoring.c actions.c threads.c
 OBJS 	= $(SRCS:.c=.o)
 CC	 	= cc
 RM 		= rm -f
-CFLAGS 	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS 	= -g -Wall -Werror -Wextra -fsanitize=address
 NAME 	= philo
 
 all:		$(NAME)

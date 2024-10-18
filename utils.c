@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:50:44 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 12:58:42 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:57:39 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int	ft_strlen(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
-	while (str[i])
+	while (str[i] != '\0')
 		i++;
 	return (i);
 }
@@ -109,15 +111,3 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void	print_message(char *str, t_philo *philo, int id)
-{
-	size_t time;
-
-	pthread_mutex_lock(philo->write_lock);
-	time = get_current_time() - philo->start_time;
-	if (!dead_loop(philo))
-	{
-		printf("%zu %d %s", time, id, str);
-	}
-	pthread_mutex_unlock(philo->write_lock);
-}

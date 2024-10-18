@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:17:03 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 14:55:28 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/18 16:36:25 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	init_program(&program, philos);
 	init_forks(forks, ft_atoi(argv[1]));
 	init_philos(philos, &program, forks, argv);
-	create_thread(&program, forks);
+	thread_create(&program, forks);
 	destroy_all(NULL, &program, forks);
 	return (0);
 }

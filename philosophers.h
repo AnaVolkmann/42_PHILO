@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:17:47 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 14:53:14 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:24:52 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ typedef struct s_philo
 	int				id;// identifier for the philosopher
 	int				eating;//Flag if philo is eating (1:eating, 0:not eating)
 	int				meals_eaten;//Counter for num of meals eaten by the philo
-	int				last_meal;//Timestamp of the last meal eaten
+	size_t			last_meal;//Timestamp of the last meal eaten
 	size_t			t_die;//Time limit (in milliseconds) before the philo dies
 	size_t			t_eat;//Time (in milliseconds) taken to eat a meal
 	size_t			t_sleep;//Time (in milliseconds) taken to sleep
 	size_t			start_time;//Start time of the philosopher's activity
-	long int		num_philos;//Total number of philosophers in the simulation
+	int				num_philos;//Total number of philosophers in the simulation
 	int				x_to_eat; //No. meals to eat before they can stop -1 unlimit
 	int				*dead;//Pointer to flag if the philo is dead 1:dead,0:alive
 	pthread_mutex_t	*r_fork;//Pointer to the mutex for the right fork
@@ -58,7 +58,6 @@ int		ft_strlen(char *str);
 int		ft_usleep(size_t milliseconds);
 size_t	get_current_time(void);
 void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks);
-void	print_message(char *str, t_philo *philo, int id);
 
 /***********************HANDLE_ARGS**************/
 
@@ -82,14 +81,16 @@ void	ft_sleep(t_philo *philo);
 /*************************THREADS*****************/
 
 int		dead_loop(t_philo *philo);
-void *philo_routine(void *pointer);
-int	create_thread(t_program *program, pthread_mutex_t *forks);
+void 	*philo_routine(void *pointer);
+int		thread_create(t_program *program, pthread_mutex_t *forks);
 
 /************************MONITORING**************/
 
+void	print_message(char *str, t_philo *philo, int id);
 int		check_if_dead(t_philo *philos);
 void	*monitor(void *pointer);
 int		check_if_all_ate(t_philo *philo);
+int		philosopher_dead(t_philo *philo, size_t time_to_die);
 
 
 #endif
