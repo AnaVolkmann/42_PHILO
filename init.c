@@ -6,14 +6,21 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:16:02 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 16:44:37 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:21:26 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// Initializing the input from user
-
+/**
+ * @brief Initializes the input parameters for the philosopher.
+ *
+ * This function sets the timing parameters and number of philosophers
+ * based on user input from command-line arguments.
+ *
+ * @param philo Pointer to the philosopher structure to initialize.
+ * @param argv Array of command-line arguments.
+ */
 void	init_input(t_philo *philo, char **argv)
 {
 	philo->t_die = ft_atoi(argv[2]);
@@ -26,8 +33,17 @@ void	init_input(t_philo *philo, char **argv)
 		philo->x_to_eat = -1;
 }
 
-// Initializing the philosophers
-
+/**
+ * @brief Initializes the philosophers and their attributes.
+ *
+ * This function assigns unique IDs, initializes their states, and sets
+ * up their mutex locks and fork pointers.
+ *
+ * @param philos Array of philosopher structures to initialize.
+ * @param program Pointer to the program structure.
+ * @param forks Array of mutexes for the forks.
+ * @param argv Array of command-line arguments.
+ */
 void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks,
 		char **argv)
 {
@@ -55,8 +71,15 @@ void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks,
 	}
 }
 
-// Initializing the forks mutexes
-
+/**
+ * @brief Initializes the mutexes for the forks.
+ *
+ * This function creates mutexes for each fork to control access
+ * during dining.
+ *
+ * @param forks Array of mutexes to initialize.
+ * @param philo_num Number of philosophers (forks).
+ */
 void	init_forks(pthread_mutex_t *forks, int philo_num)
 {
 	int	i;
@@ -69,8 +92,15 @@ void	init_forks(pthread_mutex_t *forks, int philo_num)
 	}
 }
 
-// Initializing the program structure
-
+/**
+ * @brief Initializes the program structure.
+ *
+ * This function sets the initial state of the program and initializes
+ * the mutexes for synchronization.
+ *
+ * @param program Pointer to the program structure to initialize.
+ * @param philos Pointer to the array of philosophers.
+ */
 void	init_program(t_program *program, t_philo *philos)
 {
 	program->dead_flag = 0;

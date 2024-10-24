@@ -6,13 +6,22 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:31:06 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 16:44:16 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:22:22 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// Print message funtion
+/**
+ * @brief Prints a message with a timestamp for the philosopher.
+ *
+ * This function prints a message indicating the state of the philosopher,
+ * including the time since the philosopher started.
+ *
+ * @param str Message string to print.
+ * @param philo Pointer to the philosopher structure.
+ * @param id The ID of the philosopher.
+ */
 void	print_message(char *str, t_philo *philo, int id)
 {
 	size_t	time;
@@ -24,7 +33,16 @@ void	print_message(char *str, t_philo *philo, int id)
 	pthread_mutex_unlock(philo->write_lock);
 }
 
-// Checks if the philosopher is dead
+/**
+ * @brief Checks if the philosopher has died.
+ *
+ * This function checks if the philosopher's last meal was longer than
+ * the time to die and if they are not currently eating.
+ *
+ * @param philo Pointer to the philosopher structure.
+ * @param time_to_die The time limit for the philosopher before they die.
+ * @return 1 if the philosopher is dead, 0 otherwise.
+ */
 int	philosopher_dead(t_philo *philo, size_t time_to_die)
 {
 	pthread_mutex_lock(philo->meal_lock);
@@ -37,7 +55,16 @@ int	philosopher_dead(t_philo *philo, size_t time_to_die)
 	return (0);
 }
 
-// Check if any philo died
+/**
+ * @brief Checks if any philosopher has died.
+ *
+ * This function iterates through all philosophers and checks if any
+ * philosopher is dead. If so, it prints the death message and updates
+ * the dead flag.
+ *
+ * @param philos Array of philosopher structures.
+ * @return 1 if any philosopher has died, 0 otherwise.
+ */
 int	check_if_dead(t_philo *philos)
 {
 	int	i;
@@ -58,7 +85,15 @@ int	check_if_dead(t_philo *philos)
 	return (0);
 }
 
-// Checks if all the philos ate the num_of_meals
+/**
+ * @brief Checks if all philosophers have eaten the required number of meals.
+ *
+ * This function verifies if each philosopher has eaten the specified number
+ * of meals, and if so, sets the dead flag to indicate completion.
+ *
+ * @param philos Array of philosopher structures.
+ * @return 1 if all philosophers have eaten the required meals, 0 otherwise.
+ */
 int	check_if_all_ate(t_philo *philos)
 {
 	int	i;
@@ -86,7 +121,15 @@ int	check_if_all_ate(t_philo *philos)
 	return (0);
 }
 
-// Monitor thread routine
+/**
+ * @brief Monitor thread routine to check philosopher states.
+ *
+ * This function runs in a separate thread and continuously checks if any
+ * philosopher has died or if all have eaten the required meals.
+ *
+ * @param pointer Pointer to the philosopher array.
+ * @return Pointer to the philosopher array.
+ */
 void	*monitor(void *pointer)
 {
 	t_philo	*philos;

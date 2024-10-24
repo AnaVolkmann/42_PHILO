@@ -6,13 +6,21 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:48:45 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/14 17:51:48 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:24:21 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/** @brief Checks if the input is numbers only*/
+/**
+ * @brief Checks if the input string contains only numeric characters.
+ *
+ * This function verifies that all characters in the input string
+ * are digits (0-9). 
+ *
+ * @param argv The input string to check.
+ * @return 1 if the string contains non-numeric characters, 0 otherwise.
+ */
 int	check_args(char *argv)
 {
 	int	i;
@@ -27,7 +35,17 @@ int	check_args(char *argv)
 	return (0);
 }
 
-/** @brief Checks if the program input is correct*/
+/**
+ * @brief Validates the command-line arguments provided to the program.
+ *
+ * This function checks each argument for validity, ensuring that
+ * they are positive integers within acceptable ranges. If any
+ * argument is invalid, an appropriate error message is written to
+ * standard error.
+ *
+ * @param argv Array of command-line arguments.
+ * @return 1 if any argument is invalid, 0 otherwise.
+ */
 int	valid_args(char **argv)
 {
 	if (ft_atoi(argv[1]) > PHILO_MAX || ft_atoi(argv[1]) <= 0
