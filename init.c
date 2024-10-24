@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:16:02 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 16:44:57 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:44:37 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,3 @@ void	init_program(t_program *program, t_philo *philos)
 	pthread_mutex_init(&program->dead_lock, NULL);
 	pthread_mutex_init(&program->meal_lock, NULL);
 }
-
-

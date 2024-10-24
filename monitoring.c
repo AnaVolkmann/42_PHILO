@@ -6,14 +6,13 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:31:06 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 17:25:21 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:44:16 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 // Print message funtion
-
 void	print_message(char *str, t_philo *philo, int id)
 {
 	size_t	time;
@@ -26,21 +25,19 @@ void	print_message(char *str, t_philo *philo, int id)
 }
 
 // Checks if the philosopher is dead
-
 int	philosopher_dead(t_philo *philo, size_t time_to_die)
 {
 	pthread_mutex_lock(philo->meal_lock);
 	if ((get_current_time() - philo->last_meal >= time_to_die)
 		&& philo->eating == 0)
-		{
-			return (pthread_mutex_unlock(philo->meal_lock), 1);
-		}
+	{
+		return (pthread_mutex_unlock(philo->meal_lock), 1);
+	}
 	pthread_mutex_unlock(philo->meal_lock);
 	return (0);
 }
 
 // Check if any philo died
-
 int	check_if_dead(t_philo *philos)
 {
 	int	i;
@@ -62,7 +59,6 @@ int	check_if_dead(t_philo *philos)
 }
 
 // Checks if all the philos ate the num_of_meals
-
 int	check_if_all_ate(t_philo *philos)
 {
 	int	i;
@@ -91,7 +87,6 @@ int	check_if_all_ate(t_philo *philos)
 }
 
 // Monitor thread routine
-
 void	*monitor(void *pointer)
 {
 	t_philo	*philos;

@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:17:47 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 17:24:52 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:45:03 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_sleep(t_philo *philo);
 /*************************THREADS*****************/
 
 int		dead_loop(t_philo *philo);
-void 	*philo_routine(void *pointer);
+void	*philo_routine(void *pointer);
 int		thread_create(t_program *program, pthread_mutex_t *forks);
 
 /************************MONITORING**************/
@@ -91,6 +91,5 @@ int		check_if_dead(t_philo *philos);
 void	*monitor(void *pointer);
 int		check_if_all_ate(t_philo *philo);
 int		philosopher_dead(t_philo *philo, size_t time_to_die);
-
 
 #endif

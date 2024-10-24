@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:10:20 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:09 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:43:37 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_think(t_philo *philo)
 	print_message("is thinking", philo, philo->id);
 }
 
-/** @brief Makes the philosopher sleep for a specified duration and prints the corresponding message.
+/** @brief Makes the philosopher sleep for a specified duration
+ * and prints the corresponding message.
  */
 void	ft_sleep(t_philo *philo)
 {
@@ -26,7 +27,8 @@ void	ft_sleep(t_philo *philo)
 	ft_usleep(philo->t_sleep);
 }
 
-/** @brief Controls the eating process for the philosopher, managing fork locks and updating meal stats.
+/** @brief Controls the eating process for the philosopher,
+ * managing fork locks and updating meal stats.
  - If there's only one philosopher, they can't eat, so just wait to die. */
 void	ft_eat(t_philo *philo)
 {

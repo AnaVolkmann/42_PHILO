@@ -6,14 +6,13 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:56:10 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/18 17:26:45 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:43:56 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 // Checks if the value of dead_flag changed
-
 int	dead_loop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
@@ -24,7 +23,6 @@ int	dead_loop(t_philo *philo)
 }
 
 // Thread routine
-
 void	*philo_routine(void *pointer)
 {
 	t_philo	*philo;
@@ -42,7 +40,6 @@ void	*philo_routine(void *pointer)
 }
 
 // Creates all the threads
-
 int	thread_create(t_program *program, pthread_mutex_t *forks)
 {
 	pthread_t	observer;
