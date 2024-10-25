@@ -1,8 +1,8 @@
-SRCS 	= main.c utils.c handle_args.c init.c monitoring.c actions.c threads.c
+SRCS 	= main.c utils.c handle_args.c init.c monitor.c routine_actions.c threads.c
 OBJS 	= $(SRCS:.c=.o)
 CC	 	= cc
 RM 		= rm -f
-CFLAGS 	= -g -Wall -Werror -Wextra -fsanitize=address
+CFLAGS 	= -g -Wall -Werror -Wextra -fsanitize=thread
 NAME 	= philo
 
 all:		$(NAME)

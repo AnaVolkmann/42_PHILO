@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 16:16:02 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 17:21:26 by ana-lda-         ###   ########.fr       */
+/*   Created: 2023/08/09 12:05:40 by druina            #+#    #+#             */
+/*   Updated: 2024/10/25 16:45:24 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 /**
  * @brief Initializes the input parameters for the philosopher.
@@ -23,14 +23,14 @@
  */
 void	init_input(t_philo *philo, char **argv)
 {
-	philo->t_die = ft_atoi(argv[2]);
-	philo->t_eat = ft_atoi(argv[3]);
-	philo->t_sleep = ft_atoi(argv[4]);
-	philo->num_philos = ft_atoi(argv[1]);
+	philo->time_to_die = ft_atoi(argv[2]);
+	philo->time_to_eat = ft_atoi(argv[3]);
+	philo->time_to_sleep = ft_atoi(argv[4]);
+	philo->num_of_philos = ft_atoi(argv[1]);
 	if (argv[5])
-		philo->x_to_eat = ft_atoi(argv[5]);
+		philo->x_times_to_eat = ft_atoi(argv[5]);
 	else
-		philo->x_to_eat = -1;
+		philo->x_times_to_eat = -1;
 }
 
 /**
@@ -64,7 +64,7 @@ void	init_philos(t_philo *philos, t_program *program, pthread_mutex_t *forks,
 		philos[i].dead = &program->dead_flag;
 		philos[i].l_fork = &forks[i];
 		if (i == 0)
-			philos[i].r_fork = &forks[philos[i].num_philos - 1];
+			philos[i].r_fork = &forks[philos[i].num_of_philos - 1];
 		else
 			philos[i].r_fork = &forks[i - 1];
 		i++;

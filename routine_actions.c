@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions.c                                          :+:      :+:    :+:   */
+/*   routine_actions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 18:10:20 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 17:25:54 by ana-lda-         ###   ########.fr       */
+/*   Created: 2024/10/25 16:36:17 by ana-lda-          #+#    #+#             */
+/*   Updated: 2024/10/25 18:43:48 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 /**
  * @brief Makes the philosopher think and prints the corresponding message.
@@ -33,12 +33,11 @@ void	ft_think(t_philo *philo)
  * philosopher is sleeping, then it invokes ft_usleep to pause
  * execution for the specified sleep duration.
  *
- * @param philo Pointer to the philosopher structure.
- */
+ * @param philo Pointer to the philosopher structure.*/
 void	ft_sleep(t_philo *philo)
 {
 	print_message("is sleeping", philo, philo->id);
-	ft_usleep(philo->t_sleep);
+	ft_usleep(philo->time_to_sleep);
 }
 
 /**
@@ -52,15 +51,25 @@ void	ft_sleep(t_philo *philo)
  */
 void	ft_eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->r_fork);
-	print_message("has taken a fork", philo, philo->id);
-	if (philo->num_philos == 1)
+	pthread_mutex_t	*tmp_left;
+	pthread_mutex_t	*tmp_right;
+
+	tmp_left = philo->l_fork;
+	tmp_right = philo->r_fork;
+	if (philo->id % 2 == 1)
 	{
-		ft_usleep(philo->t_die);
-		pthread_mutex_unlock(philo->r_fork);
+		tmp_left = philo->r_fork;
+		tmp_right = philo->l_fork;
+	}
+	pthread_mutex_lock(tmp_left);
+	print_message("has taken a fork", philo, philo->id);
+	if (philo->num_of_philos == 1)
+	{
+		ft_usleep(philo->time_to_die);
+		pthread_mutex_unlock(tmp_left);
 		return ;
 	}
-	pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(tmp_right);
 	print_message("has taken a fork", philo, philo->id);
 	philo->eating = 1;
 	print_message("is eating", philo, philo->id);
@@ -68,8 +77,8 @@ void	ft_eat(t_philo *philo)
 	philo->last_meal = get_current_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep(philo->t_eat);
+	ft_usleep(philo->time_to_eat);
 	philo->eating = 0;
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(tmp_right);
+	pthread_mutex_unlock(tmp_left);
 }

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 14:17:47 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 16:45:03 by ana-lda-         ###   ########.fr       */
+/*   Created: 2023/06/26 14:20:06 by druina            #+#    #+#             */
+/*   Updated: 2024/10/25 16:48:03 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
-# include <unistd.h>
-# include <string.h>
+#ifndef PHILO_H
+# define PHILO_H
+# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
-# include <pthread.h>
+# include <unistd.h>
 
 # define PHILO_MAX 300
 
@@ -28,12 +27,12 @@ typedef struct s_philo
 	int				eating;//Flag if philo is eating (1:eating, 0:not eating)
 	int				meals_eaten;//Counter for num of meals eaten by the philo
 	size_t			last_meal;//Timestamp of the last meal eaten
-	size_t			t_die;//Time limit (in milliseconds) before the philo dies
-	size_t			t_eat;//Time (in milliseconds) taken to eat a meal
-	size_t			t_sleep;//Time (in milliseconds) taken to sleep
+	size_t			time_to_die;//Time limit (in milliseconds) before the philo dies
+	size_t			time_to_eat;//Time (in milliseconds) taken to eat a meal
+	size_t			time_to_sleep;//Time (in milliseconds) taken to sleep
 	size_t			start_time;//Start time of the philosopher's activity
-	int				num_philos;//Total number of philosophers in the simulation
-	int				x_to_eat; //No. meals to eat before they can stop -1 unlimit
+	int				num_of_philos;//Total number of philosophers in the simulation
+	int				x_times_to_eat; //No. meals to eat before they can stop -1 unlimit
 	int				*dead;//Pointer to flag if the philo is dead 1:dead,0:alive
 	pthread_mutex_t	*r_fork;//Pointer to the mutex for the right fork
 	pthread_mutex_t	*l_fork;//Pointer to the mutex for the left fork
@@ -61,8 +60,8 @@ void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks);
 
 /***********************HANDLE_ARGS**************/
 
-int		valid_args(char **argv);
-int		check_args(char *argv);
+int		check_valid_args(char **argv);
+int		check_arg_content(char *argv);
 
 /***********************INIT*********************/
 

@@ -5,12 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 14:50:44 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 16:44:37 by ana-lda-         ###   ########.fr       */
+/*   Created: 2023/08/16 09:17:55 by druina            #+#    #+#             */
+/*   Updated: 2024/10/25 16:48:24 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
 
 int	ft_atoi(char *str)
 {
@@ -35,19 +47,6 @@ int	ft_atoi(char *str)
 	}
 	return (sign * nb);
 }
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	if (str == NULL)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
 /** @brief Destroys all the mutexes used in the program
  *  and handles error logging.
  *
@@ -70,7 +69,7 @@ void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks)
 	pthread_mutex_destroy(&program->write_lock);
 	pthread_mutex_destroy(&program->meal_lock);
 	pthread_mutex_destroy(&program->dead_lock);
-	while (i < program->philos[0].num_philos)
+	while (i < program->philos[0].num_of_philos)
 	{
 		pthread_mutex_destroy(&forks[i]);
 		i++;
@@ -84,7 +83,6 @@ void	destroy_all(char *str, t_program *program, pthread_mutex_t *forks)
  * @param milliseconds The number of milliseconds to sleep.
  * @return Always returns 0.
  */
-
 int	ft_usleep(size_t milliseconds)
 {
 	size_t	start;

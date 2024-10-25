@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 12:56:10 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 17:23:38 by ana-lda-         ###   ########.fr       */
+/*   Created: 2023/08/11 14:01:57 by druina            #+#    #+#             */
+/*   Updated: 2024/10/25 16:46:27 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 /**
  * @brief Checks if the philosopher is marked as dead.
@@ -71,20 +71,20 @@ int	thread_create(t_program *program, pthread_mutex_t *forks)
 	pthread_t	observer;
 	int			i;
 
+	if (pthread_create(&observer, NULL, &monitor, program->philos) != 0)
+		destroy_all("Thread creation error", program, forks);
 	i = 0;
-	while (i < program->philos[0].num_philos)
+	while (i < program->philos[0].num_of_philos)
 	{
 		if (pthread_create(&program->philos[i].thread, NULL, &philo_routine,
 				&program->philos[i]) != 0)
 			destroy_all("Thread creation error", program, forks);
 		i++;
 	}
-	if (pthread_create(&observer, NULL, &monitor, program->philos) != 0)
-		destroy_all("Thread creation error", program, forks);
 	i = 0;
 	if (pthread_join(observer, NULL) != 0)
 		destroy_all("Thread join error", program, forks);
-	while (i < program->philos[0].num_philos)
+	while (i < program->philos[0].num_of_philos)
 	{
 		if (pthread_join(program->philos[i].thread, NULL) != 0)
 			destroy_all("Thread join error", program, forks);

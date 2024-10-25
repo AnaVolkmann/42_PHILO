@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 14:48:45 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/24 17:24:21 by ana-lda-         ###   ########.fr       */
+/*   Created: 2024/10/25 16:37:23 by ana-lda-          #+#    #+#             */
+/*   Updated: 2024/10/25 16:37:48 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 /**
  * @brief Checks if the input string contains only numeric characters.
@@ -21,14 +21,14 @@
  * @param argv The input string to check.
  * @return 1 if the string contains non-numeric characters, 0 otherwise.
  */
-int	check_args(char *argv)
+int	check_arg_content(char *arg)
 {
 	int	i;
 
 	i = 0;
-	while (argv[i])
+	while (arg[i] != '\0')
 	{
-		if (argv[i] < '0' || argv[i] > '9')
+		if (arg[i] < '0' || arg[i] > '9')
 			return (1);
 		i++;
 	}
@@ -46,18 +46,18 @@ int	check_args(char *argv)
  * @param argv Array of command-line arguments.
  * @return 1 if any argument is invalid, 0 otherwise.
  */
-int	valid_args(char **argv)
+int	check_valid_args(char **argv)
 {
 	if (ft_atoi(argv[1]) > PHILO_MAX || ft_atoi(argv[1]) <= 0
-		|| check_args(argv[1]) == 1)
-		return (write(2, "Invalid number of philosophers\n", 31), 1);
-	if (ft_atoi(argv[2]) <= 0 || check_args(argv[2]) == 1)
+		|| check_arg_content(argv[1]) == 1)
+		return (write(2, "Invalid philosophers number\n", 29), 1);
+	if (ft_atoi(argv[2]) <= 0 || check_arg_content(argv[2]) == 1)
 		return (write(2, "Invalid time to die\n", 21), 1);
-	if (ft_atoi(argv[3]) <= 0 || check_args(argv[3]) == 1)
+	if (ft_atoi(argv[3]) <= 0 || check_arg_content(argv[3]) == 1)
 		return (write(2, "Invalid time to eat\n", 21), 1);
-	if (ft_atoi(argv[4]) <= 0 || check_args(argv[4]) == 1)
+	if (ft_atoi(argv[4]) <= 0 || check_arg_content(argv[4]) == 1)
 		return (write(2, "Invalid time to sleep\n", 23), 1);
-	if (argv[5] && (ft_atoi(argv[5]) < 0 || check_args(argv[5]) == 1))
+	if (argv[5] && (ft_atoi(argv[5]) < 0 || check_arg_content(argv[5]) == 1))
 		return (write(2, "Invalid number of times each philosopher must eat\n",
 				51), 1);
 	return (0);
