@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine_actions.c                                  :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:36:17 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/25 18:43:48 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:29:15 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@
  */
 void	ft_think(t_philo *philo)
 {
+	size_t	t_think;
+
+	t_think = (philo->time_to_eat * 2) - philo->time_to_sleep;
 	print_message("is thinking", philo, philo->id);
+	if (philo->id % 2 != 0)
+		ft_usleep(t_think * 0.42);
 }
 
 /**
@@ -40,6 +45,20 @@ void	ft_sleep(t_philo *philo)
 	ft_usleep(philo->time_to_sleep);
 }
 
+void	take_forks(t_philo *philo, pthread_mutex_t **left,
+			pthread_mutex_t **right)
+{
+	*left = philo->l_fork;
+	*right = philo->r_fork;
+	if (philo->id % 2 == 1)
+	{
+		*left = philo->r_fork;
+		*right = philo->l_fork;
+	}
+	pthread_mutex_lock(*left);
+	print_message("has taken a fork", philo, philo->id);
+}
+
 /**
  * @brief Controls the eating process for the philosopher.
  *
@@ -47,22 +66,13 @@ void	ft_sleep(t_philo *philo)
  * and ensures that if there is only one philosopher, they cannot eat
  * and will simply wait until they die.
  - If there's only one philosopher, they can't eat, so just wait to die.
- * @param philo Pointer to the philosopher structure.
- */
+ * @param philo Pointer to the philosopher structure.*/
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_t	*tmp_left;
 	pthread_mutex_t	*tmp_right;
 
-	tmp_left = philo->l_fork;
-	tmp_right = philo->r_fork;
-	if (philo->id % 2 == 1)
-	{
-		tmp_left = philo->r_fork;
-		tmp_right = philo->l_fork;
-	}
-	pthread_mutex_lock(tmp_left);
-	print_message("has taken a fork", philo, philo->id);
+	take_forks(philo, &tmp_left, &tmp_right);
 	if (philo->num_of_philos == 1)
 	{
 		ft_usleep(philo->time_to_die);

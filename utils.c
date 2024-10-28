@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 09:17:55 by druina            #+#    #+#             */
-/*   Updated: 2024/10/25 16:48:24 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:28:06 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	ft_atoi(char *str)
 	}
 	return (sign * nb);
 }
+
 /** @brief Destroys all the mutexes used in the program
  *  and handles error logging.
  *

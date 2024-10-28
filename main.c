@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:37:03 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/25 16:47:07 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:24:26 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ int	main(int argc, char **argv)
 	destroy_all(NULL, &program, forks);
 	return (0);
 }
-
