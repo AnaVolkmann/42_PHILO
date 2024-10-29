@@ -6,7 +6,7 @@
 /*   By: ana-lda- <ana-lda-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:36:17 by ana-lda-          #+#    #+#             */
-/*   Updated: 2024/10/28 14:29:15 by ana-lda-         ###   ########.fr       */
+/*   Updated: 2024/10/29 15:34:29 by ana-lda-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	ft_think(t_philo *philo)
 {
 	size_t	t_think;
 
-	t_think = (philo->time_to_eat * 2) - philo->time_to_sleep;
+	t_think = (philo->time_to_eat - philo->time_to_sleep + 1);
 	print_message("is thinking", philo, philo->id);
 	if (philo->id % 2 != 0)
-		ft_usleep(t_think * 0.42);
+		ft_usleep(t_think);
 }
 
 /**
