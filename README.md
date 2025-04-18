@@ -29,10 +29,10 @@ For detailed information, refer to the [**subject of this project**](README_file
     	 Work on the same memory space, learn about mutexes, semaphores, and shared memory.
 
 > [!NOTE]  
-> Because of 42 School norm requirements:
-> * Each function can't have more than 25 lines of code.
-> * All variables are declared and aligned at the top of each function.
-> * Project should be created just with allowed functions otherwise it's cheating.
+> In accordance with the 42 School coding norms:  
+> * Each function must not exceed 25 lines of code.  
+> * Every variable should be declared at the top of the function and initialized on a separate line.  
+> * Only allowed functions may be used—using others is considered cheating.
 
 ## Mandatory Part
 
