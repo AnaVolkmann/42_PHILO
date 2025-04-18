@@ -1,13 +1,19 @@
 
-<div/>
 <div align=center>
 	<h1>
 		<i>Philosophers</i>
 	</h1>
 	<img src=https://github.com/AnaVolkmann/42_project_badges/blob/main/badges/philosopherse.png alt=philosophers_badge/>
 	<p align=center>
-    		The Dining Philosophers Problem
-	</p>
+        <p align="center">
+	<b><i>The Dining Philosophers Problem</i></b><br>
+  
+---
+
+<h2>
+		Final score
+	</h2>
+	<img src= https://github.com/AnaVolkmann/AnaVolkmann/blob/main/score_pipex.png alt=fractol_grade/>
 
 ---
 <div align=left>
